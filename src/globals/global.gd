@@ -20,12 +20,10 @@ func check_angle_discontinuity(angle):
 	   angle = angle + PI * 2
 	return angle
 
-func _set_rotation(node, dest_angle,rot_speed_divider):
-	var curr = node.get_global_rot()
-	
+func get_rot_step(curr_rot, dest_angle,rot_speed_divider):	
 	#ensure always turn the quickest direction
-	var error = dest_angle - curr
-	check_angle_discontinuity(error)
+	var error = dest_angle - curr_rot
+	error = check_angle_discontinuity(error)
 	
 	var step  = error / rot_speed_divider
-	node.rotate(step)
+	return step
