@@ -13,15 +13,19 @@ func resize_to(ref_rec, resizable):
     var pos = -size/2
     resizable.edit_set_rect(Rect2(pos,size))
 
+func check_angle_discontinuity(angle):
+	if(angle > PI):  
+	   angle = angle - PI * 2
+	elif(angle < -PI):
+	   angle = angle + PI * 2
+	return angle
+
 func _set_rotation(node, dest_angle,rot_speed_divider):
 	var curr = node.get_global_rot()
 	
 	#ensure always turn the quickest direction
 	var error = dest_angle - curr
-	if(error > PI):  
-	   error = error - PI * 2
-	elif(error < -PI):
-	   error = error + PI * 2
+	check_angle_discontinuity(error)
 	
 	var step  = error / rot_speed_divider
 	node.rotate(step)

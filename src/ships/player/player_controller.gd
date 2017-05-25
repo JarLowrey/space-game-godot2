@@ -31,28 +31,38 @@ func _init_body(body):
 	body.set_angular_damp(1)
 
 func _move():
-	var force = Vector2()
-	var pressed = false
+	var body = get_node("RigidBody2D")
+	
+	var angle_diff = 0
+	var move = false
 	if Input.is_action_pressed("ui_up"):
-		pressed = true
-		force += Vector2(0, -force_amt)
-	if Input.is_action_pressed("ui_down"):
-		pressed = true
-		force += Vector2(0, force_amt)
-	if Input.is_action_pressed("ui_left"):
-		pressed = true
-		force += Vector2(-force_amt, 0)
-	if Input.is_action_pressed("ui_right"):
-		pressed = true
-		force += Vector2(force_amt, 0)
-	
-#	var force = Vector2(cos(get_global_rot()), sin(get_global_rot())) * force_amt
-	
-	if pressed:
-		var body = get_node("RigidBody2D")
+		move = true
+		angle_diff = 1
+	elif Input.is_action_pressed("ui_down"):
+		move = true
+		angle_diff = -1
+	if move:
+		var move_angle = deg2rad(body.get_global_rotd()) * angle_diff
+		get_node("/root/global").check_angle_discontinuity(move_angle)
+		var force = Vector2(cos(move_angle), sin(move_angle)) * force_amt
 		body.apply_impulse(Vector2(), force)
-		get_node("/root/global")._set_rotation(body.get_node("Sprite"), force.angle(), rot_speed_divider)
-		get_node("/root/global")._set_rotation(body.get_node("CollisionPolygon2D"), force.angle(), rot_speed_divider)
+	
+	angle_diff = 0
+	move = false
+	if Input.is_action_pressed("ui_left"):
+		move = true
+		angle_diff = 50
+	elif Input.is_action_pressed("ui_right"):
+		move = true
+		angle_diff = -50
+	if move:
+		get_node("/root/global")._set_rotation(body, deg2rad(body.get_rotd() + angle_diff), rot_speed_divider)
+	
+#	if pressed:
+#		var body = get_node("RigidBody2D")
+#		body.apply_impulse(Vector2(), force)
+#		get_node("/root/global")._set_rotation(body.get_node("Sprite"), force.angle(), rot_speed_divider)
+#		get_node("/root/global")._set_rotation(body.get_node("CollisionPolygon2D"), force.angle(), rot_speed_divider)
 
 func _process(delta):
 	_move()
