@@ -5,8 +5,10 @@ export var rot_speed_divider = 7
 
 func _ready():
 	set_process(true)
-	_change_body("res://src/bodies/player_ship1.tscn","")
+	var glob = get_node("/root/global")
+	glob.change_body(self,"res://src/bodies/player_ship1.tscn","")
 	add_guns()
+	glob.set_mask(get_node("RigidBody2D"),glob.FACTIONS.player)
 	pass
 	
 func add_guns():
@@ -14,21 +16,6 @@ func add_guns():
 		var gun = load("res://src/ship_systems/weapons/guns/basic_gun.tscn").instance()
 #		gun.auto_fire = (false)
 		pos.add_child(gun)
-
-func _change_body(body_path,script_path):
-	var old_body = get_node("RigidBody2D")
-	old_body.set_name("delete_me_thx_Aaaaaaaaa")
-	var new_body = load(body_path).instance()
-	new_body.set_name("RigidBody2D")
-	
-	for child in old_body.get_node("import_nodes").get_children():
-		old_body.get_node("import_nodes").remove_child(child)
-		new_body.get_node("import_nodes").add_child(child)
-	
-	add_child(new_body)
-	if script_path and script_path.length() > 0:
-		new_body.set_script(load(script_path))
-	old_body.free()
 
 func _move():
 	var force = Vector2()
