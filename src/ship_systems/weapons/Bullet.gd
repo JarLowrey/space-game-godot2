@@ -8,19 +8,18 @@ var deleted = false
 var target = null setget set_target
 
 #misc vars
-export var fire_pos_offset = [0,0]
+export var fire_pos_offset = [0.0,0.0]
 export var follow_gun = false
 export var fit_collider_to_sprite = true setget set_fit_collider_to_sprite
 
 #scaling change related vars
-export var size_scaling_velocity = [0,0]
-export var max_size_scale = [0,0]
+export var size_scaling_velocity = [0.0,0.0]
+export var max_size_scale = [0.0,0.0]
 
 #death/kill/free() related vars
 export var kill_on_collide = false setget set_kill_on_collide
 export var kill_viewport_exit = true setget set_kill_viewport_exit
-export var kill_travel_dist = -1 setget set_kill_travel_dist
-export var kill_after_time = -1 setget set_kill_after_time
+export var kill_after_time = -1.0 setget set_kill_after_time
 
 #PID controller vars for torque value when bullet is tracking an object
 var _prev_error = 0
@@ -33,7 +32,6 @@ var _PID_Ki = 100.0
 var _PID_Kd = 1000.0
 
 var _traveled_dist = 0
-var _prev_pos = null
 var _vis_notifier = null
 
 signal bullet_killed
@@ -129,10 +127,6 @@ func set_kill_on_collide(val):
 	kill_on_collide = val
 	if val:
 		connect("body_enter", self, "kill")
-func set_kill_travel_dist(val):
-	kill_travel_dist = val
-	if kill_travel_dist > 0:
-		_prev_pos = get_global_pos()
 func set_kill_viewport_exit(val):
 	kill_viewport_exit = val
 	if val:
@@ -143,16 +137,6 @@ func set_kill_viewport_exit(val):
 	else:
 		if _vis_notifier:
 			_vis_notifier.disconnect("exit_screen",self,"kill")
-	
-func _fixed_process(delta):
-	#increment travel distance if that is a death param
-	if _prev_pos != null and !deleted:
-		_traveled_dist += get_global_pos().distance_to(_prev_pos)
-		if(_traveled_dist >= kill_travel_dist):
-			kill()
-		else:
-			_prev_pos = get_global_pos()
-	pass
 
 func _process(delta):
 	if target:
@@ -161,7 +145,6 @@ func _process(delta):
 
 func _ready():
 	set_process(true)
-	set_fixed_process(true)
 	
 	if fit_collider_to_sprite:
 		resize_to(get_node(sprite_node_name),get_node(collider_node_name))

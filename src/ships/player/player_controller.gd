@@ -5,7 +5,6 @@ export var rot_speed_divider = 7
 
 func _ready():
 	set_process(true)
-	_init_body(get_node("RigidBody2D"))
 	_change_body("res://src/bodies/player_ship1.tscn","")
 	add_guns()
 	pass
@@ -21,7 +20,6 @@ func _change_body(body_path,script_path):
 	old_body.set_name("delete_me_thx_Aaaaaaaaa")
 	var new_body = load(body_path).instance()
 	new_body.set_name("RigidBody2D")
-	_init_body(new_body)
 	
 	for child in old_body.get_node("import_nodes").get_children():
 		old_body.get_node("import_nodes").remove_child(child)
@@ -31,11 +29,6 @@ func _change_body(body_path,script_path):
 	if script_path and script_path.length() > 0:
 		new_body.set_script(load(script_path))
 	old_body.free()
-
-func _init_body(body):
-	body.set_gravity_scale(0)
-	body.set_linear_damp(5)
-	body.set_angular_damp(1)
 
 func _move():
 	var force = Vector2()

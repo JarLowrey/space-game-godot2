@@ -10,6 +10,8 @@ rot_speed_divider = 7
 
 [node name="RigidBody2D" parent="." instance=ExtResource( 2 )]
 
+collision/mask = 2
+
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D/import_nodes"]
 
 anchor_mode = 1

@@ -37,7 +37,7 @@ shapes/2/trigger = false
 shapes/3/shape = SubResource( 4 )
 shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/3/trigger = false
-collision/layers = 1
+collision/layers = 2
 collision/mask = 1
 mode = 0
 mass = 1.0
@@ -52,8 +52,8 @@ sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
+damp_override/linear = 5.0
+damp_override/angular = 3.0
 
 [node name="gun_locations" type="Node2D" parent="."]
 
