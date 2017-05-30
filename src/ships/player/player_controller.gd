@@ -12,7 +12,7 @@ func _ready():
 	pass
 	
 func add_guns():
-	for pos in get_node("RigidBody2D/gun_locations").get_children():
+	for pos in get_node("RigidBody2D/CollisionPolygon2D/gun_locations").get_children():
 		var gun = load("res://src/ship_systems/weapons/guns/basic_gun.tscn").instance()
 #		gun.auto_fire = (false)
 		pos.add_child(gun)
@@ -38,10 +38,8 @@ func _move():
 		var body = get_node("RigidBody2D")
 		body.apply_impulse(Vector2(), force)
 		# #cannot rotate the body, must use a PID system for bodies
-		var rot_step = get_node("/root/global").get_rot_step(body.get_node("Sprite").get_global_rot(), force.angle() - PI/2, rot_speed_divider)
-		body.get_node("Sprite").rotate(rot_step)
+		var rot_step = get_node("/root/global").get_rot_step(body.get_node("CollisionPolygon2D").get_global_rot(), force.angle() - PI/2, rot_speed_divider)
 		body.get_node("CollisionPolygon2D").rotate(rot_step)
-		body.get_node("gun_locations").rotate(rot_step)
 
 func _process(delta):
 	_move()

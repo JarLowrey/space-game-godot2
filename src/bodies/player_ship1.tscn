@@ -47,28 +47,6 @@ velocity/angular = 0.0
 damp_override/linear = 5.0
 damp_override/angular = 3.0
 
-[node name="gun_locations" type="Node2D" parent="."]
-
-[node name="right" type="Position2D" parent="gun_locations"]
-
-transform/pos = Vector2( 0, 30 )
-
-[node name="rear" type="Position2D" parent="gun_locations"]
-
-transform/pos = Vector2( -20, 0 )
-
-[node name="middle" type="Position2D" parent="gun_locations"]
-
-transform/pos = Vector2( 35, 0 )
-
-[node name="left" type="Position2D" parent="gun_locations"]
-
-transform/pos = Vector2( 0, -30 )
-
-[node name="Sprite" type="Sprite" parent="."]
-
-texture = ExtResource( 1 )
-
 [node name="import_nodes" type="Node2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -77,5 +55,27 @@ build_mode = 0
 polygon = Vector2Array( -37.9226, -7.21775, -27.703, -13.6415, -24.1992, -46.3442, 4.99969, -48.6801, 12.0074, -12.7655, 36.8265, -7.80173, 37.4104, 7.0897, 11.1315, 11.7615, 6.75163, 47.9681, -25.6591, 44.7562, -27.1191, 13.5135, -37.6307, 6.21374 )
 shape_range = Vector2( 0, 2 )
 trigger = false
+
+[node name="gun_locations" type="Node2D" parent="CollisionPolygon2D"]
+
+[node name="right" type="Position2D" parent="CollisionPolygon2D/gun_locations"]
+
+transform/pos = Vector2( 0, 30 )
+
+[node name="rear" type="Position2D" parent="CollisionPolygon2D/gun_locations"]
+
+transform/pos = Vector2( -20, 0 )
+
+[node name="middle" type="Position2D" parent="CollisionPolygon2D/gun_locations"]
+
+transform/pos = Vector2( 35, 0 )
+
+[node name="left" type="Position2D" parent="CollisionPolygon2D/gun_locations"]
+
+transform/pos = Vector2( 0, -30 )
+
+[node name="Sprite" type="Sprite" parent="CollisionPolygon2D"]
+
+texture = ExtResource( 1 )
 
 

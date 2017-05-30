@@ -8,11 +8,7 @@
 script/script = ExtResource( 1 )
 rot_speed_divider = 7
 
-[node name="RigidBody2D" parent="." instance=ExtResource( 2 )]
-
-collision/mask = 2
-
-[node name="Camera2D" type="Camera2D" parent="RigidBody2D/import_nodes"]
+[node name="Camera2D" type="Camera2D" parent="."]
 
 anchor_mode = 1
 rotating = false
@@ -30,6 +26,8 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
+
+[node name="RigidBody2D" parent="." instance=ExtResource( 2 )]
 
 
 [editable path="RigidBody2D"]
