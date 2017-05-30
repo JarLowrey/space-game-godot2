@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://src/ships/player/player_controller.gd" type="Script" id=1]
-[ext_resource path="res://src/bodies/enemy1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/ships/ship.tscn" type="PackedScene" id=2]
 
 [node name="player" type="Node2D"]
 
 script/script = ExtResource( 1 )
 rot_speed_divider = 7
 
-[node name="RigidBody2D" parent="." instance=ExtResource( 2 )]
+[node name="ship" parent="." instance=ExtResource( 2 )]
 
-[node name="Camera2D" type="Camera2D" parent="RigidBody2D/custom_nodes"]
+[node name="Camera2D" type="Camera2D" parent="ship/RigidBody2D/custom_nodes"]
 
 anchor_mode = 1
 rotating = false
@@ -30,4 +30,5 @@ drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 
 
-[editable path="RigidBody2D"]
+[editable path="ship"]
+[editable path="ship/RigidBody2D"]
