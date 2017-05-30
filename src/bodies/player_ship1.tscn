@@ -47,7 +47,7 @@ velocity/angular = 0.0
 damp_override/linear = 5.0
 damp_override/angular = 3.0
 
-[node name="import_nodes" type="Node2D" parent="."]
+[node name="custom_nodes" type="Node2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 

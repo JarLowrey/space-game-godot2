@@ -72,6 +72,6 @@ transform/pos = Vector2( 0, 10 )
 
 texture = ExtResource( 1 )
 
-[node name="import_nodes" type="Node2D" parent="."]
+[node name="custom_nodes" type="Node2D" parent="."]
 
 

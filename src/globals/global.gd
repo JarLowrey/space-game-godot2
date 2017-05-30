@@ -44,9 +44,9 @@ func change_body(node,body_path,script_path):
 	if node.has_node("RigidBody2D"):
 		var old_body = node.get_node("RigidBody2D")
 		old_body.set_name("delete_me_thx_Aaaaaaaaa")
-		for child in old_body.get_node("import_nodes").get_children():
-			old_body.get_node("import_nodes").remove_child(child)
-			new_body.get_node("import_nodes").add_child(child)
+		for child in old_body.get_node("custom_nodes").get_children():
+			old_body.get_node("custom_nodes").remove_child(child)
+			new_body.get_node("custom_nodes").add_child(child)
 		old_body.free()
 	
 	node.add_child(new_body)
