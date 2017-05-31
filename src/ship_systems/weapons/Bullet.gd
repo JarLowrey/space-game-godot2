@@ -4,6 +4,7 @@ var gun_shot_from = null
 const sprite_node_name = "Sprite"
 const collider_node_name = "CollisionPolygon"
 
+var dmg = 5
 var deleted = false
 var target = null setget set_target
 

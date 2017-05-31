@@ -9,7 +9,6 @@ func _ready():
 	glob.change_body(get_node("ship"),"res://src/bodies/player_ship1.tscn","")
 	add_guns()
 	glob.set_mask(get_node("ship/RigidBody2D"),glob.FACTIONS.player)
-	get_node("ship/RigidBody2D/custom_nodes/HP").setup(100,"regular explosion",load("res://assets/imgs/gear/guns/gun01.png"))
 	pass
 	
 func add_guns():
