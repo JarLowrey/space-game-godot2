@@ -17,14 +17,15 @@ func _ready():
 func kill():
 	queue_free()
 #	var size = get_node("RigidBody2D/CollisionPolygon2D/Sprite").get_item_rect().size
+	var pos = get_node("RigidBody2D/CollisionPolygon2D/Sprite").get_global_pos()
 	var explosion = load("res://src/fx/Explosion.tscn").instance()
 	get_node("/root").add_child(explosion)
-	explosion.play(get_global_pos(), "regular explosion")
+	explosion.play(pos, "regular explosion")
 	
 	var emitter = load("res://src/fx/Debris.tscn").instance()
 	get_node("/root").add_child(emitter)
 	emitter.set_texture(load("res://assets/imgs/gear/guns/gun01.png"))
-	emitter.set_global_pos(get_global_pos())
+	emitter.set_global_pos(pos)
 	emitter.set_emitting(true)
 
 	print("kill")
