@@ -7,7 +7,7 @@
 offsets = FloatArray( 0, 1 )
 colors = ColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[node name="FallingDebris" type="Particles2D"]
+[node name="Debris" type="Particles2D"]
 
 config/amount = 5
 config/lifetime = 1.0

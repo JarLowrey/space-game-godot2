@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://src/globals/global.gd" type="Script" id=1]
+[ext_resource path="res://src/globals/pool_manager.gd" type="Script" id=2]
+[ext_resource path="res://src/fx/Debris.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/fx/Explosion.tscn" type="PackedScene" id=4]
+
+[node name="global" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="Pools" type="Node" parent="."]
+
+script/script = ExtResource( 2 )
+
+[node name="Debris" type="Node" parent="Pools"]
+
+[node name="Debris" parent="Pools/Debris" instance=ExtResource( 3 )]
+
+[node name="Explosions" type="Node" parent="Pools"]
+
+[node name="Explosion" parent="Pools/Explosions" instance=ExtResource( 4 )]
+
+
