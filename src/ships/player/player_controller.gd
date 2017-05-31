@@ -42,4 +42,5 @@ func _move():
 		body.get_node("CollisionPolygon2D").rotate(rot_step)
 
 func _process(delta):
-	_move()
+	if has_node("ship"):
+		_move()

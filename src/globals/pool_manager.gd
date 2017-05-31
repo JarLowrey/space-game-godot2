@@ -7,3 +7,4 @@ func _get_pooled_node(pool_name,scene_name):
 	
 	var node = load(scene_name).instance()
 	get_node(pool_name).add_child(node)
+	return node
