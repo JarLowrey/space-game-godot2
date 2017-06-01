@@ -37,11 +37,10 @@ func _create_meteors(low,high,size):
 		var bodies_in_similar_sizes = get_node("/root/global").meteor_json[size]
 		var body_scene_name = bodies_in_similar_sizes[randi() % bodies_in_similar_sizes.size()] + ".tscn"
 		body_scene_name = body_scene_name.replace("Brown","").replace("Grey","")
-		print(body_scene_name)
 		get_node("/root/global").change_body(self,"res://src/bodies/meteor/"+body_scene_name)
 		
-		meteor.set_global_pos(get_node("RigidBody2D").get_global_pos())
 		get_node("/root").add_child(meteor)
+		meteor.set_global_pos(get_node("RigidBody2D").get_global_pos())
 
 func _spawn_child_meteors():
 	var my_size = get_size()
