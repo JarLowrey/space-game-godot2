@@ -7,6 +7,12 @@ enum FACTIONS{
 	player = 0,
 	enemy = 1
 }
+var meteor_json = {}
+
+func _ready():	
+	var file = File.new()
+	file.open("res://assets/json/meteor_sizes.json",File.READ)
+	meteor_json.parse_json(file.get_as_text())
 
 func set_mask(node,faction):
 	for team in FACTIONS:
@@ -35,18 +41,17 @@ func get_rot_step(curr_rot, dest_angle,rot_speed_divider):
 	var step  = error / rot_speed_divider
 	return step
 
-func change_body(node,body_path,script_path):
+func change_body(node,body_path):
 	var new_body = load(body_path).instance()
 	new_body.set_name("RigidBody2D")
-	if script_path and script_path.length() > 0:
-		new_body.set_script(load(script_path))
 	
 	if node.has_node("RigidBody2D"):
 		var old_body = node.get_node("RigidBody2D")
 		old_body.set_name("delete_me_thx_Aaaaaaaaa")
-		for child in old_body.get_node("custom_nodes").get_children():
-			old_body.get_node("custom_nodes").remove_child(child)
-			new_body.get_node("custom_nodes").add_child(child)
+		if old_body.has_node("custom_nodes"):
+			for child in old_body.get_node("custom_nodes").get_children():
+				old_body.get_node("custom_nodes").remove_child(child)
+				new_body.get_node("custom_nodes").add_child(child)
 		old_body.free()
 	
 	node.add_child(new_body)

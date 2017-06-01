@@ -6,7 +6,7 @@ export var rot_speed_divider = 7
 func _ready():
 	set_process(true)
 	var glob = get_node("/root/global")
-	glob.change_body(get_node("ship"),"res://src/bodies/player_ship1.tscn","")
+	glob.change_body(get_node("ship"),"res://src/bodies/player_ship1.tscn")
 	add_guns()
 	glob.set_mask(get_node("ship/RigidBody2D"),glob.FACTIONS.player)
 	pass

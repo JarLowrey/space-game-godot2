@@ -1,0 +1,36 @@
+{
+	"xsmall": [
+		"meteorBrown_tiny1",
+		"meteorBrown_tiny2",
+		"meteorGrey_tiny1",
+		"meteorGrey_tiny1"
+	],
+	"small": [
+		"meteorBrown_small1",
+		"meteorBrown_small2",
+		"meteorGrey_small1",
+		"meteorGrey_small1"
+	],
+	"medium": [
+		"meteorBrown_med1",
+		"meteorBrown_med2",
+		"meteorGrey_med1",
+		"meteorGrey_med1"
+	],
+	"large": [
+		"meteorBrown_big1",
+		"meteorBrown_big2",
+		"meteorBrown_big3",
+		"meteorBrown_big4",
+		"meteorGrey_big1",
+		"meteorGrey_big1",
+		"meteorGrey_big3",
+		"meteorGrey_big4"
+	],
+	"xlarge": [
+		"spaceMeteors_001",
+		"spaceMeteors_002",
+		"spaceMeteors_003",
+		"spaceMeteors_004",
+	]
+}

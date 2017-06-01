@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://src/entities/ships/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/entities/ships/ship.tscn" type="PackedScene" id=2]
-
-
-
+[ext_resource path="res://src/entities/Meteor/Meteor.tscn" type="PackedScene" id=3]
 
 [node name="Node" type="Node2D"]
 
@@ -17,5 +15,29 @@ transform/pos = Vector2( 52, 181 )
 [node name="ship 2" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 270, 96 )
+
+[node name="Meteor" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 115.038, -157.779 )
+
+[node name="Meteor2" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 382.073, 210.087 )
+
+[node name="Meteor3" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -166.402, 190.142 )
+
+[node name="Meteor4" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -238.169, 6.61583 )
+
+[node name="Meteor5" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 414.591, 25.7282 )
+
+[node name="Meteor1" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -326.38, -222.732 )
 
 

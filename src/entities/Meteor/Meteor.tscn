@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://src/entities/ships/ship.gd" type="Script" id=1]
-[ext_resource path="res://src/bodies/enemy1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/entities/Meteor/Meteor.gd" type="Script" id=1]
+[ext_resource path="res://src/bodies/meteor/meteor_big1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/ship_systems/Health/Health.tscn" type="PackedScene" id=3]
 
-[node name="ship" type="Node2D"]
+[node name="Meteor" type="Node2D"]
 
 script/script = ExtResource( 1 )
 

@@ -2,18 +2,8 @@ extends Node2D
 
 var dmg = 10
 
-var _hp = null
-
-func collision(body):
-	_hp.damage(body,get_global_pos())
-	if body.has_node("custom_nodes/HP"):
-		body.get_node("custom_nodes/HP").damage(self,get_global_pos())
-	return
-
 func _ready():
-	get_node("RigidBody2D").connect("body_enter",self,"collision")
-	_hp = get_node("RigidBody2D/custom_nodes/HP")
-	_hp.setup(20.0)
+	get_node("RigidBody2D/custom_nodes/HP").setup(20.0)
 	pass
 
 func kill():
