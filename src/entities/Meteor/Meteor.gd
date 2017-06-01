@@ -40,7 +40,7 @@ func _create_meteors(low,high,size):
 		print(body_scene_name)
 		get_node("/root/global").change_body(self,"res://src/bodies/meteor/"+body_scene_name)
 		
-		meteor.set_global_pos(get_global_pos())
+		meteor.set_global_pos(get_node("RigidBody2D").get_global_pos())
 		get_node("/root").add_child(meteor)
 
 func _spawn_child_meteors():
@@ -65,7 +65,7 @@ func kill():
 		emitter.set_texture(load("res://assets/imgs/meteors/meteorGrey_tiny2.png"))
 	else:
 		emitter.set_texture(load("res://assets/imgs/meteors/meteorBrown_tiny2.png"))
-	emitter.set_global_pos(get_global_pos())
+	emitter.set_global_pos(get_node("RigidBody2D").get_global_pos())
 	emitter.set_emitting(true)
 	
 	_spawn_child_meteors()
