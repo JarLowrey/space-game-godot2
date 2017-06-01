@@ -1,15 +1,19 @@
 extends Node2D
 
 onready var _global = get_node("/root/global")
+var dmg = 5
 
 func _ready():
 	_init_body(null)
 	pass
 
 func _init_body(color):
+	set_rot(rand_range(0, 2 * PI))
+	
 	get_node("RigidBody2D/custom_nodes/HP").setup(20.0)
 	get_node("RigidBody2D").set_linear_velocity(Vector2(rand_range(-100,100),rand_range(-100,100)))
-	set_rot(rand_range(0, 2 * PI))
+	get_node("RigidBody2D").set_contact_monitor(true)
+	get_node("RigidBody2D").set_max_contacts_reported(1)
 	
 	if color:
 		var tx = _get_texture_name().replace("Brown",color).replace("Grey",color)
@@ -40,9 +44,8 @@ func _get_texture_name():
 
 func get_size():	
 	for size in _global.meteor_json:
-		for texture_name in _global.meteor_json[size]:
-			if _get_texture_name() == texture_name:
-				return size
+		if _global.meteor_json[size].has(_get_texture_name()):
+			return size
 	
 	return null #shouldn't ever happen
 

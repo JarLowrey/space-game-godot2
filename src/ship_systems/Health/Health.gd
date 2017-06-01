@@ -23,12 +23,15 @@ func _ready():
 	_my_entity = get_node("../../..")
 	_my_bar = get_node("HealthBar")
 	_my_entity.get_node("RigidBody2D").connect("body_enter",self,"collision")
+	_my_entity.get_node("RigidBody2D").connect("body_enter_shape",self,"collision_shape")
 	_my_bar.set_hidden(true)
 	set_process(true)
 
+func collision_shape(body_id, body, body_shape, local_shape):
+	collision(body)
+
 func collision(body):
-	if body.get("dmg") != null:
-		damage(body,get_global_pos())
+	damage(body,get_global_pos())
 	
 	if body.has_node("custom_nodes/HP"):
 		body.get_node("custom_nodes/HP").damage(_my_entity,get_global_pos())
