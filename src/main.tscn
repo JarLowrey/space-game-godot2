@@ -18,6 +18,30 @@ transform/pos = Vector2( 270, 96 )
 
 [node name="Meteor" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 115.038, -157.779 )
+transform/pos = Vector2( 157.143, -143.375 )
+
+[node name="Meteor1" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 125.01, 25.0461 )
+
+[node name="Meteor2" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -157.538, 97.0681 )
+
+[node name="Meteor3" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 313.376, -81.3249 )
+
+[node name="Meteor4" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -139.809, -133.402 )
+
+[node name="Meteor5" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 472.932, -148.915 )
+
+[node name="Meteor6" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -419.033, -188.804 )
 
 

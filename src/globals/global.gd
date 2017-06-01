@@ -13,6 +13,17 @@ func _ready():
 	var file = File.new()
 	file.open("res://assets/json/meteor_sizes.json",File.READ)
 	meteor_json.parse_json(file.get_as_text())
+	randomize()
+	
+func test():
+	for i in range(0,10):
+		print(randi()%100)
+		
+	for i in range(0,10):
+		print(randf())
+		
+	for i in range(0,10):
+		print(rand_range(0,100))
 
 func set_mask(node,faction):
 	for team in FACTIONS:
@@ -55,7 +66,3 @@ func change_body(node,body_path):
 		old_body.free()
 	
 	node.add_child(new_body)
-
-func rand(low,high):
-	randomize()
-	return rand_range(low,high)
