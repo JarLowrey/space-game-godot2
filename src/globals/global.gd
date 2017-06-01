@@ -55,3 +55,7 @@ func change_body(node,body_path):
 		old_body.free()
 	
 	node.add_child(new_body)
+
+func rand(low,high):
+	randomize()
+	return rand_range(low,high)
