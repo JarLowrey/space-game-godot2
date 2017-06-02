@@ -32,7 +32,7 @@ func _move():
 	if Input.is_action_pressed("ui_right"):
 		pressed = true
 		force += Vector2(1, 0)
-	force *= force_amt
+	force *= force_amt * get_node("ship/RigidBody2D").get_mass()
 	
 	if pressed:
 		var body = get_node("ship/RigidBody2D")

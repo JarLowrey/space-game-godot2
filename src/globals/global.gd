@@ -14,6 +14,12 @@ func _ready():
 	file.open("res://assets/json/meteor_sizes.json",File.READ)
 	meteor_json.parse_json(file.get_as_text())
 	randomize()
+
+func derive_mass(node):
+	var dimen = node.get_item_rect().size
+	var area = dimen.x * dimen.y
+	#standardize 100x100 to have a mass of 100
+	return sqrt(area)
 	
 func test():
 	for i in range(0,10):
@@ -55,6 +61,7 @@ func get_rot_step(curr_rot, dest_angle,rot_speed_divider):
 func change_body(node,body_path):
 	var new_body = load(body_path).instance()
 	new_body.set_name("RigidBody2D")
+	new_body.set_mass(derive_mass(new_body))
 	
 	if node.has_node("RigidBody2D"):
 		var old_body = node.get_node("RigidBody2D")

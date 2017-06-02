@@ -74,6 +74,6 @@ func _resize_my_bar():
 	var sprite = _my_entity.get_node("RigidBody2D/CollisionPolygon2D/Sprite")
 	var parent_size = sprite.get_item_rect().size
 	#x and y are reversed on the bodies, so reverse them here too
-	var pos = Vector2(-parent_size.y/2, -parent_size.x/2 - bar_height - bar_margin)
-	var size = Vector2(parent_size.y, bar_height)
+	var size = Vector2(max(parent_size.y,50), bar_height)
+	var pos = Vector2(-size.x/2, -parent_size.x/2 - bar_height - bar_margin)
 	_my_bar.edit_set_rect(Rect2(pos,size))

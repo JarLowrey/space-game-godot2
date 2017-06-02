@@ -11,11 +11,9 @@ func _init_body(color):
 	set_rot(rand_range(0, 2 * PI))
 	
 	get_node("RigidBody2D/custom_nodes/HP/HealthBar").set_pos(Vector2())#must reset hp bar position sometimes
-	get_node("RigidBody2D/custom_nodes/HP").setup(50.0)
+	get_node("RigidBody2D/custom_nodes/HP").setup(_get_hp())
 	
 	get_node("RigidBody2D").set_linear_velocity(Vector2(rand_range(-100,100),rand_range(-100,100)))
-	get_node("RigidBody2D").set_contact_monitor(true)
-	get_node("RigidBody2D").set_max_contacts_reported(1)
 	
 	if color:
 		var tx = _get_texture_name().replace("Brown",color).replace("Grey",color)
@@ -44,6 +42,19 @@ func _randomize_texture():
 func _get_texture_name():
 	return get_node("RigidBody2D/CollisionPolygon2D/Sprite").get_texture().get_name().split(".")[0]
 
+func _get_hp():
+	var size = get_size()
+	if size == "tiny":
+		return 20
+	if size == "small":
+		return 30
+	if size == "medium":
+		return 50
+	if size == "large":
+		return 70
+	if size == "xlarge":
+		return 100
+
 func get_size():	
 	for size in _global.meteor_json:
 		if _global.meteor_json[size].has(_get_texture_name()):
@@ -53,7 +64,7 @@ func get_size():
 
 func _create_meteors(low,high,size):
 	var num_meteors = randi()%(high-low) + low
-	print(num_meteors)
+
 	for i in range(0,num_meteors):
 		var meteor = load("res://src/entities/Meteor/Meteor.tscn").instance()
 		get_node("/root").add_child(meteor)
@@ -74,8 +85,8 @@ func _spawn_child_meteors():
 		_create_meteors(0,3,"medium")
 		_create_meteors(0,2,"small")
 	elif my_size == "large":
-		_create_meteors(1,3,"medium")
-		_create_meteors(0,3,"small")
+		_create_meteors(1,2,"medium")
+		_create_meteors(0,2,"small")
 	elif my_size == "med":
 		_create_meteors(0,2,"small")
 #		_create_meteors(1,3,"tiny")
