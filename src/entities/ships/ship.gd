@@ -3,7 +3,7 @@ extends Node2D
 var dmg = 10
 
 func _ready():
-	get_node("RigidBody2D/custom_nodes/HP").setup(20.0)
+	get_node("RigidBody2D/custom_nodes/HP").setup(200.0)
 	pass
 
 func kill():

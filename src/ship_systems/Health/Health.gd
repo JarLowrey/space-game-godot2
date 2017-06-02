@@ -15,9 +15,9 @@ var _my_entity = null
 var _my_bar = null
 
 func setup(hp):
-	_resize_my_bar()
 	set_health(hp)
 	set_max_health(hp)
+	_resize_my_bar()
 
 func _ready():
 	_my_entity = get_node("../../..")

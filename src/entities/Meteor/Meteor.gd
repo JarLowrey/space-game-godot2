@@ -10,7 +10,8 @@ func _ready():
 func _init_body(color):
 	set_rot(rand_range(0, 2 * PI))
 	
-	get_node("RigidBody2D/custom_nodes/HP").setup(20.0)
+	get_node("RigidBody2D/custom_nodes/HP/HealthBar").set_pos(Vector2())#must reset hp bar position sometimes
+	get_node("RigidBody2D/custom_nodes/HP").setup(50.0)
 	get_node("RigidBody2D").set_linear_velocity(Vector2(rand_range(-100,100),rand_range(-100,100)))
 	get_node("RigidBody2D").set_contact_monitor(true)
 	get_node("RigidBody2D").set_max_contacts_reported(1)
@@ -51,11 +52,15 @@ func get_size():
 
 func _create_meteors(low,high,size):
 	var num_meteors = randi()%(high-low) + low
-	
+	print(num_meteors)
 	for i in range(0,num_meteors):
 		var meteor = load("res://src/entities/Meteor/Meteor.tscn").instance()
 		get_node("/root").add_child(meteor)
-		meteor.set_global_pos(get_node("RigidBody2D").get_global_pos())
+		var pos = get_node("RigidBody2D").get_global_pos()
+		var dimen = get_node("RigidBody2D/CollisionPolygon2D/Sprite").get_item_rect().size
+		pos.x += (randf()*4-2)* dimen.x/2
+		pos.y += (randf()*4-2)* dimen.y/2
+		meteor.set_global_pos(pos)
 		meteor.change_size(size)
 
 func _spawn_child_meteors():
