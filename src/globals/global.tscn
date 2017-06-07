@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://src/globals/global.gd" type="Script" id=1]
 [ext_resource path="res://src/globals/pool_manager.gd" type="Script" id=2]
 [ext_resource path="res://src/fx/Debris.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/fx/Explosion.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/globals/spawner.gd" type="Script" id=5]
 
 [node name="global" type="Node"]
 
@@ -20,5 +21,18 @@ script/script = ExtResource( 2 )
 [node name="Explosions" type="Node" parent="Pools"]
 
 [node name="Explosion" parent="Pools/Explosions" instance=ExtResource( 4 )]
+
+[node name="Meteors" type="Node" parent="Pools"]
+
+[node name="Spawner" type="Node" parent="."]
+
+script/script = ExtResource( 5 )
+
+[node name="Meteors" type="Timer" parent="Spawner"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
 
 

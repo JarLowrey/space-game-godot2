@@ -2,6 +2,7 @@ extends Node2D
 
 onready var _global = get_node("/root/global")
 var dmg = 5
+var can_use = false
 
 func _ready():
 	_init_body(null)
@@ -63,11 +64,10 @@ func get_size():
 	return null #shouldn't ever happen
 
 func _create_meteors(low,high,size):
-	var num_meteors = randi()%(high-low) + low
-
+	var num_meteors = round(randf() * (high-low)) + low
+	
 	for i in range(0,num_meteors):
-		var meteor = load("res://src/entities/Meteor/Meteor.tscn").instance()
-		get_node("/root").add_child(meteor)
+		var meteor = get_node("/root/global/Pools")._get_pooled_node("Meteors","res://src/entities/Meteor/Meteor.tscn")
 		
 #		position the new meteors so theyre not on top of one another	
 		var pos = get_node("RigidBody2D").get_global_pos()
@@ -76,6 +76,7 @@ func _create_meteors(low,high,size):
 		pos.y += (randf()*4-2)* dimen.y/2
 		meteor.set_global_pos(pos)
 		
+		meteor.get_node("RigidBody2D").set_linear_velocity(meteor.get_node("RigidBody2D").get_linear_velocity() * (1+randf()) * 4)
 		meteor.change_size(size)
 
 func _spawn_child_meteors():
@@ -85,15 +86,15 @@ func _spawn_child_meteors():
 		_create_meteors(0,3,"medium")
 		_create_meteors(0,2,"small")
 	elif my_size == "large":
-		_create_meteors(1,2,"medium")
-		_create_meteors(0,2,"small")
+		_create_meteors(2,3,"medium")
+		_create_meteors(1,2,"small")
 	elif my_size == "med":
 		_create_meteors(0,2,"small")
 #		_create_meteors(1,3,"tiny")
 #	elif my_size == "small":
 #		_create_meteors(0,2,"tiny")
 
-func kill():	
+func kill():
 	var emitter = get_node("/root/global/Pools")._get_pooled_node("Debris","res://src/fx/Debris.tscn")
 	if _get_texture_name().find("Grey") > -1:
 		emitter.set_texture(load("res://assets/imgs/meteors/meteorGrey_tiny2.png"))
@@ -102,6 +103,5 @@ func kill():
 	emitter.set_global_pos(get_node("RigidBody2D").get_global_pos())
 	emitter.set_emitting(true)
 	
+	get_node("/root/global").life_change(self,false)
 	_spawn_child_meteors()
-	
-	queue_free()

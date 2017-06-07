@@ -15,21 +15,17 @@ func _ready():
 	meteor_json.parse_json(file.get_as_text())
 	randomize()
 
+func life_change(entity,alive):
+	entity.set_process(alive)
+	entity.set_fixed_process(alive)
+	entity.set_hidden(!alive)
+	entity.can_use = !alive
+
 func derive_mass(node):
 	var dimen = node.get_item_rect().size
 	var area = dimen.x * dimen.y
 	#standardize 100x100 to have a mass of 100
 	return sqrt(area)
-	
-func test():
-	for i in range(0,10):
-		print(randi()%100)
-		
-	for i in range(0,10):
-		print(randf())
-		
-	for i in range(0,10):
-		print(rand_range(0,100))
 
 func set_mask(node,faction):
 	for team in FACTIONS:
