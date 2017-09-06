@@ -1,8 +1,6 @@
 extends Node2D
 
 onready var _global = get_node("/root/global")
-var dmg = 5
-var can_use = false
 
 func _ready():
 	_init_body(null)
@@ -11,9 +9,7 @@ func _ready():
 func _init_body(color):
 	set_rot(rand_range(0, 2 * PI))
 	
-	get_node("RigidBody2D/custom_nodes/HP/HealthBar").set_pos(Vector2())#must reset hp bar position sometimes
-	get_node("RigidBody2D/custom_nodes/HP").setup(_get_hp())
-	
+	#get_node("../HP").setup(_get_hp())
 	get_node("RigidBody2D").set_linear_velocity(Vector2(rand_range(-100,100),rand_range(-100,100)))
 	
 	if color:
@@ -63,6 +59,13 @@ func get_size():
 	
 	return null #shouldn't ever happen
 
+func _set_debris_color():
+	var entity = get_node("../")
+	if _get_texture_name().find("Grey") > -1:
+		entity.debris_texture = "res://assets/imgs/meteors/meteorGrey_tiny2.png"
+	else:
+		entity.debris_texture = "res://assets/imgs/meteors/meteorBrown_tiny2.png"
+
 func _create_meteors(low,high,size):
 	var num_meteors = round(randf() * (high-low)) + low
 	
@@ -78,6 +81,7 @@ func _create_meteors(low,high,size):
 		
 		meteor.get_node("RigidBody2D").set_linear_velocity(meteor.get_node("RigidBody2D").get_linear_velocity() * (1+randf()) * 4)
 		meteor.change_size(size)
+		print(meteor)
 
 func _spawn_child_meteors():
 	var my_size = get_size()
@@ -93,15 +97,3 @@ func _spawn_child_meteors():
 #		_create_meteors(1,3,"tiny")
 #	elif my_size == "small":
 #		_create_meteors(0,2,"tiny")
-
-func kill():
-	var emitter = get_node("/root/global/Pools")._get_pooled_node("Debris","res://src/fx/Debris.tscn")
-	if _get_texture_name().find("Grey") > -1:
-		emitter.set_texture(load("res://assets/imgs/meteors/meteorGrey_tiny2.png"))
-	else:
-		emitter.set_texture(load("res://assets/imgs/meteors/meteorBrown_tiny2.png"))
-	emitter.set_global_pos(get_node("RigidBody2D").get_global_pos())
-	emitter.set_emitting(true)
-	
-	get_node("/root/global").life_change(self,false)
-	_spawn_child_meteors()

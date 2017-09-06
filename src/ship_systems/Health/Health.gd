@@ -1,10 +1,5 @@
 extends Node2D
 
-enum EXPLOSIONS{
-	regular,
-	sonic,
-	none
-}
 var health = 0.0 setget set_health
 var max_health = 1.0 setget set_max_health
 
@@ -20,12 +15,12 @@ func setup(hp):
 	_resize_my_bar()
 
 func _ready():
-	_my_entity = get_node("../../..")
+	_my_entity = get_node("..")
 	_my_bar = get_node("HealthBar")
 	_my_entity.get_node("RigidBody2D").connect("body_enter",self,"collision")
 	_my_entity.get_node("RigidBody2D").connect("body_enter_shape",self,"collision_shape")
 	_my_bar.set_hidden(true)
-	set_process(true)
+	set_fixed_process(true)
 
 func collision_shape(body_id, body, body_shape, local_shape):
 	collision(body)
@@ -33,8 +28,9 @@ func collision_shape(body_id, body, body_shape, local_shape):
 func collision(body):
 	damage(body,get_global_pos())
 	
-	if body.has_node("custom_nodes/HP"):
-		body.get_node("custom_nodes/HP").damage(_my_entity,get_global_pos())
+	var coll_entity = body.get_parent()
+	if coll_entity.has_node("HP"):
+		coll_entity.get_node("HP").damage(_my_entity,get_global_pos())
 	return
 
 func set_max_health(val):
@@ -58,8 +54,8 @@ func set_health(val):
 	if health <= 0:
 		_my_entity.kill()
 
-func _process(delta):
-	set_global_rot(0) #inefficient...better way of doing this???
+func _fixed_process(delta):
+	set_global_pos(_my_entity.get_node("RigidBody2D").get_global_pos())
 
 func damage(node,pos):
 	var dmg = 0

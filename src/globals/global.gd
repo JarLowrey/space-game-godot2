@@ -19,7 +19,7 @@ func life_change(entity,alive):
 	entity.set_process(alive)
 	entity.set_fixed_process(alive)
 	entity.set_hidden(!alive)
-	entity.can_use = !alive
+	entity.set("can_use",!alive)
 
 func derive_mass(node):
 	var dimen = node.get_item_rect().size
@@ -66,6 +66,6 @@ func change_body(node,body_path):
 			for child in old_body.get_node("custom_nodes").get_children():
 				old_body.get_node("custom_nodes").remove_child(child)
 				new_body.get_node("custom_nodes").add_child(child)
-		old_body.free()
+		old_body.queue_free()
 	
 	node.add_child(new_body)

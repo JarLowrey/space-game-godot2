@@ -76,4 +76,15 @@ texture = ExtResource( 2 )
 
 [node name="custom_nodes" type="Node2D" parent="."]
 
+[node name="ReferenceFrame" type="ReferenceFrame" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
 
